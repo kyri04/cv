@@ -1,104 +1,53 @@
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-%	The MIT License (MIT)
-%
-%	Copyright (c) 2021 Jitin Nair
-%
-%	Permission is hereby granted, free of charge, to any person obtaining a copy
-%	of this software and associated documentation files (the "Software"), to deal
-%	in the Software without restriction, including without limitation the rights
-%	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-%	copies of the Software, and to permit persons to whom the Software is
-%	furnished to do so, subject to the following conditions:
-%	
-%	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-%	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-%	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-%	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-%	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-%	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-%	THE SOFTWARE.
-%	
-%
-%-----------------------------------------------------------------------------------------------------------------------------------------------%
-
-%----------------------------------------------------------------------------------------
-%	DOCUMENT DEFINITION
-%----------------------------------------------------------------------------------------
-
-% article class because we want to fully customize the page and not use a cv template
 \documentclass[a4paper,12pt]{article}
 
-%----------------------------------------------------------------------------------------
-%	FONT
-%----------------------------------------------------------------------------------------
-
-% % fontspec allows you to use TTF/OTF fonts directly
-% \usepackage{fontspec}
-% \defaultfontfeatures{Ligatures=TeX}
-
-% % modified for ShareLaTeX use
-% \setmainfont[
-% SmallCapsFont = Fontin-SmallCaps.otf,
-% BoldFont = Fontin-Bold.otf,
-% ItalicFont = Fontin-Italic.otf
-% ]
-% {Fontin.otf}
-
-%----------------------------------------------------------------------------------------
-%	PACKAGES
-%----------------------------------------------------------------------------------------
 \usepackage{url}
 \usepackage{parskip} 	
+\usepackage{tikz}
 
-%other packages for formatting
 \RequirePackage{color}
 \RequirePackage{graphicx}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[scale=0.9]{geometry}
 
-%tabularx environment
 \usepackage{tabularx}
-
-%for lists within experience section
 \usepackage{enumitem}
 
-% centered version of 'X' col. type
 \newcolumntype{C}{>{\centering\arraybackslash}X} 
 
-%to prevent spillover of tabular into next pages
 \usepackage{supertabular}
 \usepackage{tabularx}
 \newlength{\fullcollw}
 \setlength{\fullcollw}{0.47\textwidth}
 
-%custom \section
 \usepackage{titlesec}				
 \usepackage{multicol}
 \usepackage{multirow}
 
-%CV Sections inspired by: 
-%http://stefano.italians.nl/archives/26
 \titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
 \titlespacing{\section}{0pt}{10pt}{10pt}
 
-%for publications
 \usepackage[style=authoryear,sorting=ynt, maxbibnames=2]{biblatex}
 
-%Setup hyperref package, and colours for links
 \usepackage[unicode, draft=false]{hyperref}
 \definecolor{linkcolour}{rgb}{0,0.2,0.6}
 \hypersetup{colorlinks,breaklinks,urlcolor=linkcolour,linkcolor=linkcolour}
 \addbibresource{citations.bib}
 \setlength\bibitemsep{1em}
 
-%for social icons
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot[L]{\footnotesize Last updated: \today}
+\fancyfoot[R]{\footnotesize{Latest version: \href{https://kyri04.github.io/cv}{kyri04.github.io/cv}}}
+\fancyfoot[C]{}
+
+\fancyhead[L]{}
+\fancyhead[C]{}
+\fancyhead[R]{\href{https://kyri04.github.io/cv}{Latest version \exlink}}
+\renewcommand{\headrulewidth}{0pt}
+\setlength{\headheight}{20pt}
+
 \usepackage{fontawesome5}
 
-%debug page outer frames
-%\usepackage{showframe}
-
-
-% job listing environments
 \newenvironment{jobshort}[2]
     {
     \begin{tabularx}{\linewidth}{@{}l X r@{}}
@@ -109,45 +58,74 @@
     }
 
 \newenvironment{joblong}[2]
-    {
-    \begin{tabularx}{\linewidth}{@{}l X r@{}}
-    \textbf{#1} & \hfill &  #2 \\[3.75pt]
-    \end{tabularx}
-    \begin{minipage}[t]{\linewidth}
-    \begin{itemize}[nosep,after=\strut, leftmargin=1em, itemsep=3pt,label=--]
-    }
-    {
-    \end{itemize}
-    \end{minipage}    
-    }
+  {%
+    % End previous paragraph and insert a controlled vertical skip
+    \par\addvspace{0\baselineskip}% <--- adjust to taste
 
+    % Heading line
+    \noindent
+    \begin{tabularx}{\linewidth}{@{}l X r@{}}
+      \textbf{#1} & \hfill & #2 \\
+    \end{tabularx}
+
+    % Bullet list with fully controlled spacing (no stretch)
+    \begin{minipage}[t]{\linewidth}
+      \setlength{\parskip}{0pt}% ignore global parskip inside
+      \begin{itemize}[
+        leftmargin=1em,
+        label=--,
+        itemsep=3pt,
+        topsep=4pt,
+        parsep=0pt,
+        partopsep=0pt
+      ]
+  }
+  {%
+      \end{itemize}
+    \end{minipage}%
+  }
+
+
+\newcommand{\exlink}{%
+\tikz[x=1.2ex, y=1.2ex, baseline=-0.05ex]{% 
+    \begin{scope}[x=1ex, y=1ex]
+        \clip (-0.1,-0.1) 
+            --++ (-0, 1.2) 
+            --++ (0.6, 0) 
+            --++ (0, -0.6) 
+            --++ (0.6, 0) 
+            --++ (0, -1);
+        \path[draw, 
+            line width = 0.5, 
+            rounded corners=0.5] 
+            (0,0) rectangle (1,1);
+    \end{scope}
+    \path[draw, line width = 0.5] (0.5, 0.5) 
+        -- (1, 1);
+    \path[draw, line width = 0.5] (0.6, 1) 
+        -- (1, 1) -- (1, 0.6);
+    }
+}
 
 
 %----------------------------------------------------------------------------------------
 %	BEGIN DOCUMENT
 %----------------------------------------------------------------------------------------
 \begin{document}
-
-% non-numbered pages
-\pagestyle{empty} 
+% \pagestyle{empty} 
 
 %----------------------------------------------------------------------------------------
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-% \begin{tabularx}{\linewidth}{ @{}X X@{} }
-% \huge{Your Name}\vspace{2pt} & \hfill \emoji{incoming-envelope} email@email.com \\
-% \raisebox{-0.05\height}\faGithub\ username \ | \
-% \raisebox{-0.00\height}\faLinkedin\ username \ | \ \raisebox{-0.05\height}\faGlobe \ mysite.com  & \hfill \emoji{calling} number
-% \end{tabularx}
-
 \begin{tabularx}{\linewidth}{@{} C @{}}
-\Huge{Your Name} \\[7.5pt]
-\href{https://github.com/username}{\raisebox{-0.05\height}\faGithub\ username} \ $|$ \ 
-\href{https://linkedin.com/in/username}{\raisebox{-0.05\height}\faLinkedin\ username} \ $|$ \ 
-\href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
-\href{mailto:email@mysite.com}{\raisebox{-0.05\height}\faEnvelope \ email@mysite.com} \ $|$ \ 
-\href{tel:+000000000000}{\raisebox{-0.05\height}\faMobile \ +00.00.000.000} \\
+\Huge{Kyriacos Kyriacou} \\[7.5pt]
+\small{Research Assistant in Early Detection Cancer Research at Keele University} \\
+\href{https://github.com/kyri04}{\raisebox{-0.05\height}\faGithub\ kyri04} \ $|$ \ 
+\href{https://linkedin.com/in/kyriacos-kyriacou-ba20622b8}{\raisebox{-0.05\height}\faLinkedin\ kyriacos-kyriacou-ba20622b8} \ $|$ \ 
+% \href{https://mysite.com}{\raisebox{-0.05\height}\faGlobe \ mysite.com} \ $|$ \ 
+\href{mailto:k.kyriacou@keele.ac.uk}{\raisebox{-0.05\height}\faEnvelope \ k.kyriacou@keele.ac.uk} \ $|$ \ 
+\href{tel:+44 7401055190}{\raisebox{-0.05\height}\faMobile \ +44 7401055190} \\
 \end{tabularx}
 
 %----------------------------------------------------------------------------------------
@@ -155,63 +133,114 @@
 %----------------------------------------------------------------------------------------
 
 %Interests/ Keywords/ Summary
-\section{Summary}
-This CV is automatically generated and deployed using the \href{https://github.com/jitinnair1/autoCV}{autoCV} template along with GitHub Actions such that a new version of the CV is compiled, published and ready for use when the cv.tex file is updated. For details, \href{https://github.com/jitinnair1/autoCV}{click here}.
+% \section{Keywords}
+% \begin{center}
+%     Machine Learning $\cdot$ Bioinformatics $\cdot$ Physics
+% \end{center}
 
 %Experience
-\section{Work Experience}
+% \section{Experience}
 
-\begin{jobshort}{Designation}{Jan 2021 - present}
-long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width
-\end{jobshort}
+% % \begin{jobshort}{Research Associate at Keele University}{Oct 2025 - present}
+% % A range of research projects developing machine learning models for early cancer detection.
+% % \end{jobshort}
 
+% \begin{joblong}{Research Associate at Keele University}{Oct 2025 - present}
+% \item A range of research projects developing machine learning models for early cancer detection.
+% \item Drafting a paper on predicting prostate cancer diagnosis and ISUP grade using machine learning and X-ray scattering.
+% \end{joblong}
 
-\begin{joblong}{Designation}{Mar 2019 - Jan 2021}
-\item long long line of blah blah that will wrap when the table fills the column width
-\item again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah. again, long long line of blah blah that will wrap when the table fills the column width but this time even more long long line of blah blah
-\end{joblong}
-  
+% \begin{joblong}{Summer Intern at Keele University}{Jun 2025 - Aug 2024}
+% \item Developed models to identify cancer in X-ray scattering of biopsied
+% prostate and breast tissue samples.
+% \item Conducted research on I22 at the Diamond Light Source.
+% \item Presented my work for an Institute of Physics talk, a CRUK funded Tissue Microenvironment and Disease workshop, patient advocate sessions and various
+% departmental seminars.
+% \end{joblong}
+
 %Projects
-\section{Projects}
+\section{Recent Projects and Experience}
+\begin{joblong}{Early Cancer Detection using Machine Learning and X-ray Scattering}{}
+\item Developed models to reliably detect cancer in X-ray scattering of biopsied tissue samples.
+\item Identified key structural biomarkers for prostate and breast cancer.
+\item Conducted research on I22 at the {Diamond Light Source}.
+\item Drafting a manuscript on machine learning prediction of prostate cancer diagnosis and ISUP grade.
+\item Delivered talks for an Institute of Physics seminar and a CRUK funded Disease Workshop.
+\end{joblong}
 
-\begin{tabularx}{\linewidth}{ @{}l r@{} }
-\textbf{Some Project} & \hfill \href{https://some-link.com}{Link to Demo} \\[3.75pt]
-\multicolumn{2}{@{}X@{}}{long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width long long line of blah blah that will wrap when the table fills the column width}  \\
-\end{tabularx}
+\begin{joblong}{Developer of \texttt{signalearn}}{\href{https://github.com/kyri04/signalearn}{github.com/kyri04/signalearn}}
+\item Developed a python library to abstract machine learning workflows with series datasets.
+% \item Working towards a graphical interface that enables use of the library without programming knowledge.
+\end{joblong}
+
+\begin{joblong}{Measurement of Taste Attributes in Fruit using Machine Learning}{Third Year Project}
+\item Developed models to measure crispiness, soureness and sweetness from ultrasonic measurements of fruit.
+\item Improves standard industrial processes which are slow, destructive, expensive and subjective.
+\end{joblong}
+
+\begin{joblong}{Exoplanet Habitability Prediction with Machine Learning}{Module Project}
+% \item Synthesised thousands of expolanet transmission spectra with a diverse range of atmospheric compositions, cloud/haze treatments and surface temperatures.
+% \item Synthesised thousands of exoplanet transmission spectra to compensate for the lack of real data, with a diverse range of atmospheric conditions, cloud/haze treatments, and surface temperatures.
+% \item Trained models on the simulated spectra that accurately predict the habitability index of real spectra.
+% \item Trained on simulated exoplanet spectra to address limited real data and predict the habitability of real observations.
+% \item Synthesised and trained models on thousands of exoplanet transmission spectra with a diverse range of atmospheric conditions, cloud/haze treatments, and surface temperatures to predict 
+% the habitability index of real exoplanets.
+\item Synthesised and trained models on diverse transmission spectra to predict habitability of real exoplanets.
+\end{joblong}
 
 %----------------------------------------------------------------------------------------
 %	EDUCATION
 %----------------------------------------------------------------------------------------
 \section{Education}
-\begin{tabularx}{\linewidth}{@{}l X@{}}	
-2030 - present & PhD (Subject) at \textbf{University} \hfill \normalsize (GPA: 4.0/4.0) \\
-
-2023 - 2027 & Bachelor's Degree at \textbf{College} \hfill (GPA: 4.0/4.0) \\ 
-
-2022 & Class 12th Some Board \hfill  (Grades) \\
-
-2021 & Class 10th Some Board \hfill  (Grades) \\
+\begin{tabularx}{\linewidth}{@{}l X@{}} 2022 - 2025 & Physics BSc at
+\textbf{Keele University} \hfill (2:1) \\ 
+2020 - 2022 & A-levels at \textbf{St John Fisher Catholic College Trinity Sixth
+Form} \hfill (A$^*$ABBC) \\ 
 \end{tabularx}
+
+\section{Awards and Scholarships}
+\begin{jobshort}{Tissue Microenvironment and Disease Workshop Presentation Prize Winner}{July 2025}
+Awarded £100 second prize for oral presentation at a Tissue Microenvironment and
+Disease workshop at Keele Hall, funded by Cancer Research UK.
+\end{jobshort}
+
+\begin{jobshort}{Bob Gould Prize Winner \href{https://www.keele.ac.uk/students/academicandlearningsupport/awardsandprizes/undergraduateawardsandprizes/chemicalandphysicalsciences/}{\exlink}}{July 2025}
+Awarded the Bob Gould Prize for most outstanding performance in the third year
+Physics project.
+\end{jobshort}
+
+\begin{jobshort}{Summer Research Bursary Winner}{May 2024}
+Awarded a competitive £1600 summer research bursary following my proposal to
+explore machine learning analysis of X-ray scattering for early cancer detection
+at Keele University.
+\end{jobshort}
+
+\begin{jobshort}{FLOURISH Bursary Winner \href{https://www.keele.ac.uk/business/researchdevelopmentandinnovation/flourish/}{\exlink}}{August 2024}
+Awarded a competitive £1200 bursary to assist in digital marketing strategies with Exesios BDD.
+\end{jobshort}
 
 %----------------------------------------------------------------------------------------
 %	PUBLICATIONS
 %----------------------------------------------------------------------------------------
-\section{Publications}
-\begin{refsection}[citations.bib]
-\nocite{*}
-\printbibliography[heading=none]
-\end{refsection}
+% \section{Publications}
+% \begin{refsection}[citations.bib]
+% \nocite{*}
+% \printbibliography[heading=none]
+% \end{refsection}
 
 %----------------------------------------------------------------------------------------
 %	SKILLS
 %----------------------------------------------------------------------------------------
-\section{Skills}
+\section{Skills, Hobbies and Interests}
 \begin{tabularx}{\linewidth}{@{}l X@{}}
-Some Skills &  \normalsize{This, That, Some of this and that etc.}\\
-Some More Skills  &  \normalsize{Also some more of this, Some more that, And some of this and that etc.}\\  
+\textbf{Karate} &  \small{1st Dan Black Belt \& Instructor $\cdot$ Club Captain in 2024 $\cdot$ Social Media Officer in 2025.}\\
+\textbf{Piano} &  \small{Distinction in Grade 8 $\cdot$ Teaching piano part-time $\cdot$ \href{https://www.instagram.com/kyriskeys}{@kyriskeys}.}\\
+\textbf{Photography} &  \small{Photographing for City Bloc, NUBS, Keele Football, Stoke-on-Clay \& more $\cdot$ \href{https://www.instagram.com/kyrisphotos}{@kyrisphotos}.}\\
+\textbf{Game Dev.} &  \small{Developer of \href{https://store.steampowered.com/app/2648310/Rocket_Smash/}{Rocket Smash}, experience with Unity and Unreal Engine.}\\
+\textbf{Technical} &  \small{Experience with Python, C\#, \LaTeX, JavaScript, HTML, CSS, PHP, Rust.}\\
 \end{tabularx}
 
-\vfill
-\center{\footnotesize Last updated: \today}
+% \vfill
+% \center{\footnotesize Last updated: \today}
 
 \end{document}

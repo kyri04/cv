@@ -11,3 +11,5 @@
 *.bbl
 *.blg
 *.pdf
+*.xml
+*.bcf
