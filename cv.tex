@@ -1,4 +1,6 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper]{article}
+\usepackage{lmodern}
+\usepackage{anyfontsize}
 
 \usepackage{url}
 \usepackage{parskip} 	
@@ -8,6 +10,9 @@
 \RequirePackage{graphicx}
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage[scale=0.9]{geometry}
+
+\usepackage{amssymb}
+\usepackage{graphicx}
 
 \usepackage{tabularx}
 \usepackage{enumitem}
@@ -47,6 +52,7 @@
 \setlength{\headheight}{20pt}
 
 \usepackage{fontawesome5}
+\usepackage{microtype}
 
 \newenvironment{jobshort}[2]
     {
@@ -59,18 +65,15 @@
 
 \newenvironment{joblong}[2]
   {%
-    % End previous paragraph and insert a controlled vertical skip
-    \par\addvspace{0\baselineskip}% <--- adjust to taste
+    \par\addvspace{0\baselineskip}%
 
-    % Heading line
     \noindent
     \begin{tabularx}{\linewidth}{@{}l X r@{}}
       \textbf{#1} & \hfill & #2 \\
     \end{tabularx}
 
-    % Bullet list with fully controlled spacing (no stretch)
     \begin{minipage}[t]{\linewidth}
-      \setlength{\parskip}{0pt}% ignore global parskip inside
+      \setlength{\parskip}{0pt}
       \begin{itemize}[
         leftmargin=1em,
         label=--,
@@ -106,17 +109,14 @@
         -- (1, 1) -- (1, 0.6);
     }
 }
-
+\newcommand{\smallsquare}{\raisebox{0.15ex}{\scalebox{0.6}{$\blacksquare$}}\ }
 
 %----------------------------------------------------------------------------------------
 %	BEGIN DOCUMENT
 %----------------------------------------------------------------------------------------
 \begin{document}
+\fontsize{10.7}{12.6}\selectfont
 % \pagestyle{empty} 
-
-%----------------------------------------------------------------------------------------
-%	TITLE
-%----------------------------------------------------------------------------------------
 
 \begin{tabularx}{\linewidth}{@{} C @{}}
 \Huge{Kyriacos Kyriacou} \\[7.5pt]
@@ -128,71 +128,50 @@
 \href{tel:+44 7401055190}{\raisebox{-0.05\height}\faMobile \ +44 7401055190} \\
 \end{tabularx}
 
-%----------------------------------------------------------------------------------------
-% EXPERIENCE SECTIONS
-%----------------------------------------------------------------------------------------
-
-%Interests/ Keywords/ Summary
-% \section{Keywords}
-% \begin{center}
-%     Machine Learning $\cdot$ Bioinformatics $\cdot$ Physics
-% \end{center}
-
-%Experience
-% \section{Experience}
-
-% % \begin{jobshort}{Research Associate at Keele University}{Oct 2025 - present}
-% % A range of research projects developing machine learning models for early cancer detection.
-% % \end{jobshort}
-
-% \begin{joblong}{Research Associate at Keele University}{Oct 2025 - present}
-% \item A range of research projects developing machine learning models for early cancer detection.
-% \item Drafting a paper on predicting prostate cancer diagnosis and ISUP grade using machine learning and X-ray scattering.
-% \end{joblong}
-
-% \begin{joblong}{Summer Intern at Keele University}{Jun 2025 - Aug 2024}
-% \item Developed models to identify cancer in X-ray scattering of biopsied
-% prostate and breast tissue samples.
-% \item Conducted research on I22 at the Diamond Light Source.
-% \item Presented my work for an Institute of Physics talk, a CRUK funded Tissue Microenvironment and Disease workshop, patient advocate sessions and various
-% departmental seminars.
-% \end{joblong}
-
-%Projects
 \section{Recent Projects and Experience}
-\begin{joblong}{Early Cancer Detection using Machine Learning and X-ray Scattering}{}
-\item Developed models to reliably detect cancer in X-ray scattering of biopsied tissue samples.
-\item Identified key structural biomarkers for prostate and breast cancer.
-\item Conducted research on I22 at the {Diamond Light Source}.
-\item Drafting a manuscript on machine learning prediction of prostate cancer diagnosis and ISUP grade.
-\item Delivered talks for an Institute of Physics seminar and a CRUK funded Disease Workshop.
-\end{joblong}
 
-\begin{joblong}{Developer of \texttt{signalearn}}{\href{https://github.com/kyri04/signalearn}{github.com/kyri04/signalearn}}
-\item Developed a python library to abstract machine learning workflows with series datasets.
-% \item Working towards a graphical interface that enables use of the library without programming knowledge.
-\end{joblong}
+\begin{jobshort}{Early Cancer Detection using Machine Learning and X-ray Scattering}{}
+Developed models to reliably detect cancer in X-ray scattering of biopsied
+tissue samples \smallsquare Identified key structural biomarkers of prostate and
+breast cancer \smallsquare Conducted research on I22 at the {Diamond Light
+Source} \smallsquare Drafting a manuscript on machine learning classification of
+prostate cancer diagnosis and ISUP grade \smallsquare Delivered talks and
+presentations on my work, including at an Institute of Physics seminar and a
+Cancer Research UK funded Tissue Microenvironment and Disease workshop.
+\end{jobshort}
 
-\begin{joblong}{Measurement of Taste Attributes in Fruit using Machine Learning}{Third Year Project}
-\item Developed models to measure crispiness, soureness and sweetness from ultrasonic measurements of fruit.
-\item Improves standard industrial processes which are slow, destructive, expensive and subjective.
-\end{joblong}
+\begin{jobshort}{Developer of \texttt{signalearn}}{\href{https://github.com/kyri04/signalearn}{github.com/kyri04/signalearn}}
+Developed a Python library to abstract machine learning workflows with signals
+and sequential datasets \smallsquare Designed to
+be fully backend-agnostic, supporting any component that follows the standard
+\texttt{scikit-learn} API \smallsquare Future plans for a user-friendly
+interface to enable use without programming experience.
+\end{jobshort}
 
-\begin{joblong}{Exoplanet Habitability Prediction with Machine Learning}{Module Project}
-% \item Synthesised thousands of expolanet transmission spectra with a diverse range of atmospheric compositions, cloud/haze treatments and surface temperatures.
-% \item Synthesised thousands of exoplanet transmission spectra to compensate for the lack of real data, with a diverse range of atmospheric conditions, cloud/haze treatments, and surface temperatures.
-% \item Trained models on the simulated spectra that accurately predict the habitability index of real spectra.
-% \item Trained on simulated exoplanet spectra to address limited real data and predict the habitability of real observations.
-% \item Synthesised and trained models on thousands of exoplanet transmission spectra with a diverse range of atmospheric conditions, cloud/haze treatments, and surface temperatures to predict 
-% the habitability index of real exoplanets.
-\item Synthesised and trained models on diverse transmission spectra to predict habitability of real exoplanets.
-\end{joblong}
+\begin{jobshort}{Wakefulness Detection and Smart Alarm System from Wearable Sensors}{Personal Project} 
+Trained models to reliably detect wakefulness from Apple Watch sensor signals
+\smallsquare Currently integrating models into a prototype wearable wristband alarm
+that only deactivates when the user is awake and out of bed.
+\end{jobshort}
 
-%----------------------------------------------------------------------------------------
-%	EDUCATION
-%----------------------------------------------------------------------------------------
+\begin{jobshort}{Ultrasonic Measurement of Taste Attributes in Fruit}{Third Year Project}
+Designed and built a system for rapid ultrasonic scanning of fruit samples \smallsquare
+Trained regressors to predict penetrometer (crispiness), Brix (sweetness) and
+titratable acidity (soureness) from ultrasonic features of various
+fruit \smallsquare Demonstrated improvements over traditional industrial methods which
+are slow, destructive, expensive, and subjective.
+\end{jobshort}
+
+\begin{jobshort}{Exoplanet Habitability Prediction from Simulated Transmission Spectra}{Module Project}
+Synthesised thousands of exoplanet transmission spectra to compensate for the
+lack of real observations, with a diverse range of atmospheric compositions,
+cloud/haze treatments and surface temperatures \smallsquare Trained regression
+models on the simulations to predict habitability indices \smallsquare Models
+generalise well to real exoplanet spectra.
+\end{jobshort}
+
 \section{Education}
-\begin{tabularx}{\linewidth}{@{}l X@{}} 2022 - 2025 & Physics BSc at
+\begin{tabularx}{\linewidth}{@{}l X@{}} 2022 - 2025 & BSc in Physics at
 \textbf{Keele University} \hfill (2:1) \\ 
 2020 - 2022 & A-levels at \textbf{St John Fisher Catholic College Trinity Sixth
 Form} \hfill (A$^*$ABBC) \\ 
@@ -200,8 +179,8 @@ Form} \hfill (A$^*$ABBC) \\
 
 \section{Awards and Scholarships}
 \begin{jobshort}{Tissue Microenvironment and Disease Workshop Presentation Prize Winner}{July 2025}
-Awarded £100 second prize for oral presentation at a Tissue Microenvironment and
-Disease workshop at Keele Hall, funded by Cancer Research UK.
+Awarded £100 second prize for oral presentation at CRUK funded Tissue
+Microenvironment and Disease workshop.
 \end{jobshort}
 
 \begin{jobshort}{Bob Gould Prize Winner \href{https://www.keele.ac.uk/students/academicandlearningsupport/awardsandprizes/undergraduateawardsandprizes/chemicalandphysicalsciences/}{\exlink}}{July 2025}
@@ -210,32 +189,27 @@ Physics project.
 \end{jobshort}
 
 \begin{jobshort}{Summer Research Bursary Winner}{May 2024}
-Awarded a competitive £1600 summer research bursary following my proposal to
-explore machine learning analysis of X-ray scattering for early cancer detection
-at Keele University.
+Awarded a competitive £1,600 bursary for an 8-week summer research project at
+Keele University.
 \end{jobshort}
 
 \begin{jobshort}{FLOURISH Bursary Winner \href{https://www.keele.ac.uk/business/researchdevelopmentandinnovation/flourish/}{\exlink}}{August 2024}
-Awarded a competitive £1200 bursary to assist in digital marketing strategies with Exesios BDD.
+Awarded a competitive £1,200 bursary to complete a 100-hour digital marketing
+project with \href{https://www.exesios.com}{Exesios BDD}.
 \end{jobshort}
 
-%----------------------------------------------------------------------------------------
-%	PUBLICATIONS
-%----------------------------------------------------------------------------------------
 % \section{Publications}
 % \begin{refsection}[citations.bib]
 % \nocite{*}
 % \printbibliography[heading=none]
 % \end{refsection}
 
-%----------------------------------------------------------------------------------------
-%	SKILLS
-%----------------------------------------------------------------------------------------
 \section{Skills, Hobbies and Interests}
 \begin{tabularx}{\linewidth}{@{}l X@{}}
 \textbf{Karate} &  \small{1st Dan Black Belt \& Instructor $\cdot$ Club Captain in 2024 $\cdot$ Social Media Officer in 2025.}\\
 \textbf{Piano} &  \small{Distinction in Grade 8 $\cdot$ Teaching piano part-time $\cdot$ \href{https://www.instagram.com/kyriskeys}{@kyriskeys}.}\\
 \textbf{Photography} &  \small{Photographing for City Bloc, NUBS, Keele Football, Stoke-on-Clay \& more $\cdot$ \href{https://www.instagram.com/kyrisphotos}{@kyrisphotos}.}\\
+\textbf{Social Media} &  \small{Currently employed as webmaster and social media manager for Karate-do-Shotokai (KDS).}\\
 \textbf{Game Dev.} &  \small{Developer of \href{https://store.steampowered.com/app/2648310/Rocket_Smash/}{Rocket Smash}, experience with Unity and Unreal Engine.}\\
 \textbf{Technical} &  \small{Experience with Python, C\#, \LaTeX, JavaScript, HTML, CSS, PHP, Rust.}\\
 \end{tabularx}
